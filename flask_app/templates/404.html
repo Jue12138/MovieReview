@@ -1,0 +1,14 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h1>Error 404: Page Not Found</h1>
+        <p>Please check your username</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a href="{{ url_for('index') }}">Home Page</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "header.html" %} {% block content %}
+<div class="space" style="padding-top: 100px">
+  <h1></h1>
+</div>
+<div class="row">
+  <div class="col">
+    <h2>Registration</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>
+      Already have an account? <a href="{{ url_for('users.login') }}">Login here</a>
+    </p>
+  </div>
+</div>
+<!-- Registration Form: -->
+<div class="row">
+  <div class="col">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="alert alert-danger" role="alert">{{ messages[0] }}</div>
+    {% endif %} {% endwith %}
+    <form method="POST" action="">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        {{ form.username.label(class="form-label") }} {{
+        form.username(class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ form.email.label(class="form-label") }} {{
+        form.email(class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ form.password.label(class="form-label") }} {{
+        form.password(class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ form.confirm_password.label(class="form-label") }} {{
+        form.confirm_password(class="form-control") }}
+      </div>
+      <div class="form-group">{{ form.submit(class="btn btn-primary") }}</div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

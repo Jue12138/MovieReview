@@ -1,0 +1,50 @@
+{% extends "header.html" %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,
+message in messages %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %} {% endif %} {% endwith %}
+<div class="space" style="padding-top: 100px">
+  <h1></h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    {# Profile picture #}
+    <img class="propic" src="data:image/png;base64,{{image}}" alt="image" />
+  </div>
+  <div class="col">
+    {# Greeting #}
+    <h2>Welcome, {{ current_user.username }}!</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {# Username Update Form #}
+    <form method="POST" action="{{ url_for('users.account') }}">
+      {{ update_username_form.csrf_token }} {{
+      update_username_form.new_username.label }}<br />
+      {{ update_username_form.new_username(class="form-control") }}
+      <br />
+      <button type="submit" class="btn btn-primary">Update Username</button>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    {# Profile Picture Update Form #}
+    <form
+      method="POST"
+      action="{{ url_for('users.account') }}"
+      enctype="multipart/form-data"
+    >
+      {{ update_profile_pic_form.csrf_token }} {{
+      update_profile_pic_form.profile_pic.label }}<br />
+      {{ update_profile_pic_form.profile_pic(class="form-control") }}
+      <br />
+      <button type="submit" class="btn btn-primary">
+        Update Profile Picture
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
