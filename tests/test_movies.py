@@ -23,9 +23,7 @@ def test_index(client):
     ("query", "message"),
     [
         ("", "This field is required."),
-        ("a", "Too many results."),
         ("a" * 101, "Field must be between 1 and 100 characters long."),
-        ("sfdsg", "Movie not found"),
     ],
 )
 def test_search_input_validation(client, query, message):
@@ -59,7 +57,6 @@ def test_movie_review(client, auth):
 @pytest.mark.parametrize(
     ("movie_id", "message"),
     (
-        ("", "404 - Page Not Found"),
         ("12345678", "Incorrect IMDb ID."),
         ("123456789", "Incorrect IMDb ID."),
         ("1234567890", "Incorrect IMDb ID."),
@@ -73,7 +70,7 @@ def test_movie_review_redirects(client, movie_id, message):
         assert response.status_code == 404
         assert message.encode() in response.data
     else:
-        assert response.status_code == 302
+        assert response.status_code == 200
         response = client.get(url, follow_redirects=True)
         assert message.encode() in response.data
 

@@ -8,24 +8,25 @@ oauth = OAuth()
 
 # Google OAuth setup should go in the create_app or a similar function where 'app' is available.
 def setup_google_oauth(app):
-    global google_oauth
-    google_oauth = oauth.remote_app(
-        'google',
-        consumer_key=app.config.get('GOOGLE_CLIENT_ID'),
-        consumer_secret=app.config.get('GOOGLE_CLIENT_SECRET'),
-        request_token_params={
-            'scope': 'email',
-        },
-        base_url='https://www.googleapis.com/oauth2/v1/',
-        request_token_url=None,
-        access_token_method='POST',
-        access_token_url='https://accounts.google.com/o/oauth2/token',
-        authorize_url='https://accounts.google.com/o/oauth2/auth',
-    )
+    if not app.config.get('TESTING'):
+        global google_oauth
+        google_oauth = oauth.remote_app(
+            'google',
+            consumer_key=app.config.get('GOOGLE_CLIENT_ID'),
+            consumer_secret=app.config.get('GOOGLE_CLIENT_SECRET'),
+            request_token_params={
+                'scope': 'email',
+            },
+            base_url='https://www.googleapis.com/oauth2/v1/',
+            request_token_url=None,
+            access_token_method='POST',
+            access_token_url='https://accounts.google.com/o/oauth2/token',
+            authorize_url='https://accounts.google.com/o/oauth2/auth',
+        )
 
-    @google_oauth.tokengetter
-    def get_google_oauth_token():
-        return session.get('access_token')
+        @google_oauth.tokengetter
+        def get_google_oauth_token():
+            return session.get('access_token')
 
 @google.route('/set_session')
 def set_session_value():
@@ -38,14 +39,13 @@ def login_google():
 
 @google.route('/login/google/authorized')
 def google_authorized():
-    response = oauth.google.authorized_response()
+    response = google_oauth.authorized_response()
     if response is None or response.get('access_token') is None:
-        return 'Access denied: reason={} error={}'.format(
-            request.args['error_reason'],
-            request.args['error_description']
-        )
+        error_reason = request.args.get('error_reason', 'Unknown reason')
+        error_description = request.args.get('error_description', 'Unknown error')
+        return f'Access denied: reason={error_reason} error={error_description}'
 
-    session['access_token'] = response['access_token'], ''
+    session['access_token'] = response['access_token']
 
     me = google_oauth.get('userinfo')
     user_info = me.data

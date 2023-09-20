@@ -10,7 +10,7 @@ from flask_app.forms import LoginForm, RegistrationForm
 
 @pytest.fixture
 def app(request):
-    db_name = "p5_test_db"
+    db_name = "movie_review"
     test_config = {
         "TESTING": True,
         "MONGODB_HOST": f"mongodb://localhost:27017/{db_name}",
@@ -19,16 +19,14 @@ def app(request):
     disconnect()
     app = create_app(test_config)
 
-    User.drop_collection()
-    Review.drop_collection()
-
     ctx = app.app_context()
     ctx.push()
+    yield app
 
-    def teardown():
-        ctx.pop()
+    User.drop_collection()
+    Review.drop_collection()
+    ctx.pop()
 
-    request.addfinalizer(teardown)
     return app
 
 

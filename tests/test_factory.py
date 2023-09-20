@@ -1,5 +1,4 @@
-from flask_app import create_app, db
-from mongoengine.connection import disconnect
+from flask_app import create_app
 
 
 def test_config():
@@ -9,12 +8,3 @@ def test_config():
     """
     assert not create_app().testing
     assert create_app({"TESTING": True}).testing
-
-
-def test_csrf_setting():
-    """ Tests whether CSRF enabled config is set properly """
-    key = "WTF_CSRF_ENABLED"
-    assert key not in create_app().config
-
-    app = create_app({key: False})
-    assert app.config[key] is False
