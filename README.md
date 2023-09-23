@@ -2,25 +2,26 @@
 
 ## Description
 
-The Movie Review Web App provides a seamless experience for movie enthusiasts to share their opinions and explore others. By fusing modern technologies and focusing on user-centric design, the app bridges the gap between movie databases and community-driven content. With integrated Google sign-ins and secure data storage, the platform is both secure and convenient for its users.
+The Movie Review Web App is a platform designed to create a seamless experience for movie enthusiasts to share opinions and discover new films. It bridges the gap between large movie databases and community-driven content, offering a secure and convenient interface complete with Google Sign-In functionality.
 
 ## Features
 
-1. Dynamic Movie Data Integration: Incorporated the OMDb API to fetch detailed movie data, ensuring users always have access to up-to-date movie information.
-2. User Registration & Authentication: Implemented a secure registration and login system, allowing users to create personal accounts. Added the option for users to log in using their Google credentials, making the process more streamlined and user-friendly.
-3. User Profiles: Users have the ability to set avatars and view their comment history, offering a personalized experience.
-   Robust Backend: The app's backend was architected using Python and Flask, capitalizing on Flask's flexibility and ease of use.
-4. Data Storage: Leveraged MongoDB as a database, ensuring the efficient storage and retrieval of user-specific data including registration details, avatars, and comments.
-5. Security: Prioritized user data security by integrating Flask-Login, ensuring secure user sessions.
-6. Structured Codebase: Utilized Flask Blueprint framework to organize the codebase, resulting in an easily maintainable and scalable application structure.
+1. Dynamic Movie Data Integration: Utilizes the OMDb API to provide real-time, comprehensive movie data, giving users accurate and up-to-date information.
+2. User Registration & Authentication: Features a secure registration and login mechanism, enhanced by the option for users to authenticate using their existing Google credentials.
+3. User Profiles: Offers personalized user profiles where users can set avatars and review their comment history.
+4. Robust Backend: Engineered using Python and Flask, capitalizing on Flask's adaptability and simplicity to create a powerful backend.
+5. Data Storage: Employs MongoDB for efficient, secure storage of user data, including registration details, avatars, and comments.
+6. Security: Utilizes Flask-Login for session management, prioritizing user data security.
+7. Structured Codebase: Implements Flask Blueprint to organize the application code, resulting in a more maintainable and scalable architecture.
 
 ## Technologies Used
 
-Programming Language: Python
-Web Framework: Flask
-Database: MongoDB
-Frontend: HTML, CSS, Jinja2
-APIs: OMDb, Google OAuth
+1. Programming Language: Python
+2. Web Framework: Flask
+3. Database: MongoDB
+4. Frontend: HTML, CSS, Jinja2
+5. APIs: OMDb, Google OAuth
+6. CI/CD: GitHub Actions
 
 ## Setup
 
