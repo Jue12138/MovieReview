@@ -45,7 +45,8 @@ To install all necessary packages, run `pip3 install -r requirements.txt`
 To run this project, in the project MovieReview directory and use the
 
 ```bash
-export FLASK_APP=run.py
+export FLASK_APP=run.py  # Linux/Mac
+set FLASK_APP=run.py     # Windows
 flask run
 ```
 
