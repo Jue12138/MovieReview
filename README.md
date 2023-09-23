@@ -13,6 +13,7 @@ The Movie Review Web App is a platform designed to create a seamless experience 
 5. Data Storage: Employs MongoDB for efficient, secure storage of user data, including registration details, avatars, and comments.
 6. Security: Utilizes Flask-Login for session management, prioritizing user data security.
 7. Structured Codebase: Implements Flask Blueprint to organize the application code, resulting in a more maintainable and scalable architecture.
+8. Analytics Dashboard: Features an analytics dashboard that provides insights into user engagement metrics such as the most-reviewed movies and most active users.
 
 ## Technologies Used
 
