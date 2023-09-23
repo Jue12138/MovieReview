@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash, current_app
 from flask_login import current_user
+from mongoengine import *
+from collections import Counter
 
 from ..client import MovieClient
 from ..forms import MovieReviewForm, SearchForm
@@ -73,3 +75,30 @@ def user_detail(username):
 @movies.route("/404")
 def custom_404(error):
     return render_template("404.html"), 404
+
+##########Analytics#######
+
+@movies.route("/analytics/most-reviewed-movies", methods=["GET"])
+def most_reviewed_movies():
+    movie_reviews = Review.objects.only('imdb_id', 'movie_title')
+    count_by_movie = Counter((review.imdb_id, review.movie_title) for review in movie_reviews)
+
+    most_reviewed = sorted(count_by_movie.items(), key=lambda x: x[1], reverse=True)
+    data = [{"movie_id": movie[0], "movie_title": movie[1], "count": count} for (movie, count) in most_reviewed]
+
+    return render_template("analytics_most_reviewed.html", data=data)  # Create this HTML template
+
+@movies.route("/analytics/most-active-users", methods=["GET"])
+def most_active_users():
+    user_reviews = Review.objects.only('commenter')
+    count_by_user = Counter(str(review.commenter.id) for review in user_reviews)
+
+    most_active = sorted(count_by_user.items(), key=lambda x: x[1], reverse=True)
+    data = [{"user_id": user_id, "count": count} for (user_id, count) in most_active]
+
+    return render_template("analytics_most_active.html", data=data)  # Create this HTML template
+
+@movies.route("/analytics-dashboard", methods=["GET"])
+def analytics_dashboard():
+    return render_template("analytics_dashboard.html")
+

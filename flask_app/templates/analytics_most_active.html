@@ -1,0 +1,23 @@
+{% extends "header.html" %} {% block content %}
+
+<h1>Most Active Users</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>User ID</th>
+      <th>Review Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in data %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ entry.user_id }}</td>
+      <td>{{ entry.count }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
