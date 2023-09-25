@@ -1,34 +1,28 @@
-{% extends "header.html" %}
-{% block content %}
+{% extends "header.html" %} {% block content %}
 
-<div class="space" style="padding-top: 200px;">
-    <h1>Welcome,</h1>
+<div class="space word">
+  <h1>Welcome,</h1>
 </div>
 
 <div class="row">
-    <div class="col">
-        <h2>Please use the search bar to search for movies! </h2>
-    </div> 
+  <div class="col">
+    <h2 class="word">Please use the search bar to search for movies!</h2>
+  </div>
 
-    <div class="col">
-        <div>
-            <form action="/" class="form-inline my-2 my-lg-0" method="POST">
-                {{ form.csrf_token }}
-                {{ form.search_query(class="form-control", placeholder="Search") }}
-    
-                {% if form.search_query.errors %}
-                <div class="alert alert-warning" role="alert">
-                    {% for error in form.search_query.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% endif %}
-    
-                {{ form.submit(class="btn btn-outline-success") }}
-            </form>
+  <div class="col">
+    <div>
+      <form action="/" class="form-inline my-2 my-lg-0" method="POST">
+        {{ form.csrf_token }} {{ form.search_query(class="form-control",
+        placeholder="Search") }} {% if form.search_query.errors %}
+        <div class="alert alert-warning" role="alert">
+          {% for error in form.search_query.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
         </div>
+        {% endif %} {{ form.submit(class="btn btn-outline-success") }}
+      </form>
     </div>
+  </div>
 </div>
 
 {% endblock %}
-

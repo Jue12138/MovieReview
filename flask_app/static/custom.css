@@ -3,6 +3,22 @@ movie {
   padding: 1;
 }
 
+.navbar {
+  background-color: lightcoral !important;
+}
+
+.navbar-light .navbar-brand h1 {
+  color: gainsboro;
+}
+
+.space {
+  padding-top: 200px;
+}
+
+.word {
+  color: #584848;
+}
+
 .card-body > img {
   max-width: 200;
 }
@@ -23,4 +39,6 @@ movie {
   max-width: 64px;
 }
 
-
+.button-container {
+  margin: 20px;
+}

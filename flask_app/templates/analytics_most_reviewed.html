@@ -1,26 +1,25 @@
-{% extends "header.html" %}
-{% block content %}
+{% extends "header.html" %} {% block content %}
 
-<h1>Most Reviewed Movies</h1>
+<h1 class="space word">Most Reviewed Movies</h1>
 <table border="1">
-    <thead>
-        <tr>
-            <th>Rank</th>
-            <th>Movie ID</th>
-            <th>Movie Title</th>
-            <th>Review Count</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for entry in data %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ entry.movie_id }}</td>
-                <td>{{ entry.movie_title }}</td>
-                <td>{{ entry.count }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Movie ID</th>
+      <th>Movie Title</th>
+      <th>Review Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in data %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ entry.movie_id }}</td>
+      <td>{{ entry.movie_title }}</td>
+      <td>{{ entry.count }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% endblock %}
